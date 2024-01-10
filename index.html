@@ -37,6 +37,28 @@
 
     </header>
 
-    <div style="background-image: url('/assets/Scenes/test.jpeg'); width: 500px; height: 500px;"></div>
+  
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    .background-image {
+        background-image: url('./assets/Scenes/test.jpeg');
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1; 
+    }
+  
+</style>
+
+    <div class="background-image" style="background-image: url('./assets/Scenes/test.jpeg');"></div>
 </body>
 </html>
