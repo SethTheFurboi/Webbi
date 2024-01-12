@@ -24,15 +24,15 @@
             <h1 class="text-3xl">
                 WEBBI
               </h1>
-            <h1 class="text-3xl">
-                HUNGER: 69/100
+            <h1 id = "hunger-text" class="text-3xl">
+                ERROR: SOMETHING BROKE SOMEWHERE
             </h1>
         </div> 
         <div>
 
-        <div class="bg-orange-600 flex flex-row-reverse">
-            <h1 class="text-3xl">
-                HAPPINESS: 69/100
+        <div class="bg-orange-600 flex flex-row-reverse rounded-b-lg">
+            <h1 id = "happy-text" class="text-3xl">
+                ERROR: SOMETHING BROKE SOMEWHERE
             </h1>
         </div>
 
@@ -47,7 +47,6 @@
     }
 
     .background-image {
-        /* background-image: url('/assets/Scenes/brownground_360.jpeg'); */
         background-size: cover;
         background-position: center;
         width: 100%;
@@ -60,10 +59,38 @@
   
 </style>
 
-    <div id="weather-bg" class="background-image" style="background-image: url('/assets/Scenes/Sunny.png');"></div>
+    <div id="weather-bg" class="background-image flex justify-center" style="background-image: url('/assets/Scenes/Sunny.png');"></div>
 
     <div class="flex justify-center">
-      <img id="da-boi" class="w-auto h-auto absolute bottom-0" src="./assets/Sprites/AlobeatBeansGoBrrr.png">
+
+      <div id="pet-actions" class = "w-2/5 h-52 bg-orange-600 rounded-b-lg relative flex items-center justify-center invisible">
+
+        <button id="feed" class = "opacity-100">
+
+          <img class="w-36 h-36" src="./assets/Sprites/Food.png">
+
+        </button>
+
+        <button id="brush" class = "opacity-100">
+
+          <img class="w-36 h-36" src="./assets/Sprites/Brush.png">
+
+        </button>
+
+        <button id="pet" class = "opacity-100">
+
+          <img class="w-36 h-36" src="./assets/Sprites/Hand.png">
+
+        </button>
+
+      </div>
+
+      <button id="da-boi" class="absolute bottom-0">
+
+        <img id="pet-image" class="w-auto h-auto" src="./assets/Sprites/AlobeatBeansGoBrrr.png">
+
+      </button>
+
     </div>
 
     <script src="./assets/js/script.js"></script>
