@@ -251,7 +251,7 @@ FeedButton.addEventListener("click", function(event) {
 
     var Classes = FeedButton.classList
 
-    if (Classes.contains("opacity-100") && GlobalButtonCooldown == false) {
+    if (Classes.contains("opacity-100") && PetOptions.classList.contains("opacity-100") && GlobalButtonCooldown == false) {
 
         GlobalCD()
 
@@ -287,7 +287,7 @@ BrushButton.addEventListener("click", function(event) {
 
     var Classes = BrushButton.classList
 
-    if (Classes.contains("opacity-100") && GlobalButtonCooldown == false) {
+    if (Classes.contains("opacity-100") && PetOptions.classList.contains("opacity-100") && GlobalButtonCooldown == false) {
 
         GlobalCD()
 
@@ -323,7 +323,7 @@ PetButton.addEventListener("click", function(event) {
 
     var Classes = PetButton.classList
 
-    if (Classes.contains("opacity-100") && GlobalButtonCooldown == false) {
+    if (Classes.contains("opacity-100") && PetOptions.classList.contains("opacity-100") && GlobalButtonCooldown == false) {
 
         GlobalCD()
 
