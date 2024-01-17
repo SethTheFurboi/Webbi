@@ -23,6 +23,8 @@ var BgImages = {
 
 var DetectedWeather = "NO WEATHER SET"
 
+var CurrDay = 0
+
 
 function fetchWeatherData(Lat, Long) {
     const apiKey = '6c80a9eb6cc84c6814a3ce34cdffcaa0';
@@ -35,9 +37,7 @@ function fetchWeatherData(Lat, Long) {
         .then(response => response.json())
         .then(data => {
 
-            console.log(data.list[0])
-
-            var CurrWeather = data.list[0].weather[0].main
+            var CurrWeather = data.list[CurrDay].weather[0].main
 
             console.log(CurrWeather)
             DetectedWeather = CurrWeather
@@ -73,7 +73,59 @@ var PetButton = document.getElementById("pet")
 ActualPet.addEventListener("click", function(event) {
 
     var Classes = PetOptions.classList
-    Classes.toggle("invisible")
+    // Classes.toggle("invisible")
+
+    var CurLoopCount = 0
+    var MaxLoopCount = 10
+    var UpdateTime = 10
+
+    if (Classes.contains("opacity-0")) {
+
+        var timeInterval = setInterval(function () {
+
+            var OldTrans = CurLoopCount
+            
+            CurLoopCount += 1
+
+            var NewTrans = CurLoopCount
+
+            if (CurLoopCount <= MaxLoopCount) {
+
+                Classes.replace("opacity-"+(OldTrans*10),"opacity-"+(NewTrans*10))
+
+
+            } else {
+
+                clearInterval(timeInterval)
+
+            }
+        
+        }, UpdateTime);
+
+    } else {
+
+        var timeInterval = setInterval(function () {
+
+            var OldTrans = MaxLoopCount - CurLoopCount
+            
+            CurLoopCount += 1
+
+            var NewTrans = MaxLoopCount - CurLoopCount
+
+            if (CurLoopCount <= MaxLoopCount) {
+
+                Classes.replace("opacity-"+(OldTrans*10),"opacity-"+(NewTrans*10))
+
+
+            } else {
+
+                clearInterval(timeInterval)
+
+            }
+        
+        }, UpdateTime);   
+
+    }
 
 })
 
@@ -117,9 +169,49 @@ var AdjustStats = function(Hung, Hap) {
 
 }
 
+var PossiblePetSprites = [
+    {
+    RequiredHunger: 75,
+    RequiredHappi : 75,
+    ActualImage: "AlobeatBeansGoBrrr.png"
+    },
+    {
+        RequiredHunger: 50,
+        RequiredHappi : 50,
+        ActualImage: "sethpopcorn.png"
+    },
+    {
+        RequiredHunger: 1,
+        RequiredHappi : 1,
+        ActualImage: "FakU.png"
+    },
+    {
+        RequiredHunger: 0,
+        RequiredHappi : 0,
+        ActualImage: "deadseth.png"
+    },
+    
+]
+
 var UpdateImage = function() {
 
-    ActualPetImage.src = "./assets/Sprites/AlobeatBeansGoBrrr.png"
+    // ActualPetImage.src = "./assets/Sprites/AlobeatBeansGoBrrr.png"
+    var FoundCurrMood = false
+
+    for (var i = 0; i < PossiblePetSprites.length; i++) {
+
+        if (FoundCurrMood) {
+            break
+        }
+
+        if (PetStats.Hunger >= PossiblePetSprites[i].RequiredHunger && PetStats.Happiness >= PossiblePetSprites[i].RequiredHappi) {
+
+            FoundCurrMood = true
+            ActualPetImage.src = "./assets/Sprites/" + PossiblePetSprites[i].ActualImage
+    
+        }
+    
+      } 
 
 }
 
@@ -263,9 +355,30 @@ PetButton.addEventListener("click", function(event) {
 // Depletes stats overtime, set "Deplete Time" to the amount of seconds you want it to update with
 
 var StatDepletetime = 1
+var SecUpdate = 10
+var TimeElapsed = 0
 
 setInterval(function () {
 
+    TimeElapsed += 1
+    // console.log(TimeElapsed)
+
     AdjustStats(-1,-2)
+
+    if (TimeElapsed%SecUpdate == 0) {
+
+        if (TimeElapsed/SecUpdate >= 40) {
+
+            TimeElapsed = 0
+            CurrDay = 0
+            
+        } else {
+
+            CurrDay = TimeElapsed/SecUpdate
+
+        }
+        fetchLocationData()
+
+    }
 
 }, StatDepletetime * 1000);
