@@ -1,24 +1,29 @@
 function fetchLocationData() {
-    fetch('https://ipinfo.io/json?token=7123ef64da11b7')
-        .then(response => response.json())
-        .then(data => {
+     fetch('https://ipinfo.io/json?token=7123ef64da11b7')
+         .then(response => response.json())
+         .then(data => {
 
-            var LatAndLong = data.loc.split(",")
+             var LatAndLong = data.loc.split(",")
 
-            fetchWeatherData(LatAndLong[0],LatAndLong[1])
+             fetchWeatherData(LatAndLong[0],LatAndLong[1])
 
-        })
-        .catch(error => {
+         })
+         .catch(error => {
 
-            console.error('Error fetching location data:', error)
+             console.error('Error fetching location data:', error)
 
-        })
+         })
+
+    // fetchWeatherData(20,160)
+
 }
 window.onload = fetchLocationData;
 
 var BgImages = {
     Snow: "Snowy.png",
     Rain: "Rainy.png",
+    Clouds: "Cloudy.png",
+    Sunny: "Sunny.png",
 }
 
 var DetectedWeather = "NO WEATHER SET"
@@ -42,19 +47,17 @@ function fetchWeatherData(Lat, Long) {
             console.log(CurrWeather)
             DetectedWeather = CurrWeather
 
+            var ElementToChange = document.getElementById("weather-bg")
+
 
             if (BgImages[CurrWeather]) {
-                console.log("HEY LOOK IT FUCKIN' WORKED!")
-
-                var ElementToChange = document.getElementById("weather-bg")
-
-                console.log(ElementToChange)
 
                 ElementToChange.style = "background-image: url('/assets/Scenes/" + BgImages[CurrWeather] + "');"
 
 
             } else {
-                console.log("Seth you fucking idiot look what you've done")
+
+                ElementToChange.style = "background-image: url('/assets/Scenes/" + BgImages.Sunny + "');"
             }
 
         })
